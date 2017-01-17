@@ -25,6 +25,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 " Git wrapper
 Plugin 'tpope/vim-fugitive'
+" Tmux vim navigation
+Plugin 'christoomey/vim-tmux-navigator'
+" Latex support
+"Plugin 'vim-latex/vim-latex'
 
 " All Plugins before this line
 call vundle#end()
@@ -68,7 +72,7 @@ set hls
 
 " Set column width, color and line numbers
 "set textwidth=79
-set colorcolumn=80
+"set colorcolumn=80
 set nu
 
 " Set up tabs spaces
@@ -80,9 +84,15 @@ set tabstop=2
 " Show trailing whitespace
 set list listchars=tab:»·,trail:·
 
+" Alternate Keybindings
 " Easier insert exit
 imap jk <ESC>
 imap kj <ESC>
+" Easier split pane navigation
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 " Modify tab spacing to 4 spaces when editing python files
 function PySpacesCfg()
