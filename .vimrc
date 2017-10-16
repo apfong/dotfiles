@@ -29,6 +29,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'christoomey/vim-tmux-navigator'
 " Latex support
 "Plugin 'vim-latex/vim-latex'
+" Typescript syntax support
+Plugin 'leafgarland/typescript-vim'
 
 " All Plugins before this line
 call vundle#end()
