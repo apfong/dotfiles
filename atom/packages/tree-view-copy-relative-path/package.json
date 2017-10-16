@@ -1,0 +1,136 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+        "spec": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/apm-install-dir-11793-61711-s0hthh.0216yzm2t9"
+    ]
+  ],
+  "_from": "../d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+  "_id": "tree-view-copy-relative-path@1.2.0",
+  "_inCache": true,
+  "_location": "/tree-view-copy-relative-path",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+    "spec": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+  "_shasum": "ace36739f33ddc2423e98120b0626826dbeacdfc",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/d-11793-61711-1tykpbt.0kac1y8pvi/package.tgz",
+  "_where": "/private/var/folders/ql/lbx82h3n7lv5mn6szmptlcyr0000gn/T/apm-install-dir-11793-61711-s0hthh.0216yzm2t9",
+  "activationCommands": {
+    "atom-workspace": "tree-view-copy-relative-path:copy-path"
+  },
+  "bugs": {
+    "url": "https://github.com/vladimir-tikhonov/tree-view-copy-relative-path/issues"
+  },
+  "dependencies": {
+    "relative": "^3.0.2"
+  },
+  "description": "Allows you to copy relative path to current file from tree view.",
+  "devDependencies": {
+    "coffeelint": "^1.14.2"
+  },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/vladimir-tikhonov/tree-view-copy-relative-path#readme",
+  "keywords": [
+    "tree-view",
+    "relative path"
+  ],
+  "license": "MIT",
+  "main": "./lib/tree-view-copy-relative-path",
+  "name": "tree-view-copy-relative-path",
+  "optionalDependencies": {},
+  "readme": "# tree-view-copy-relative-path package\n\nAllows you to copy relative path to file from tree view.\n\n![Demo gif](https://cloud.githubusercontent.com/assets/4998556/12075222/85e019da-b18a-11e5-8cd6-6d007435734e.gif)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladimir-tikhonov/tree-view-copy-relative-path.git"
+  },
+  "version": "1.2.0",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "isarray",
+        "version": "1.0.0",
+        "path": "node_modules/isarray/index.js"
+      },
+      {
+        "name": "isobject",
+        "version": "2.1.0",
+        "path": "node_modules/isobject/index.js"
+      },
+      {
+        "name": "relative",
+        "version": "3.0.2",
+        "path": "node_modules/relative/index.js"
+      }
+    ],
+    "extensions": {
+      ".json": [
+        "coffeelint.json",
+        "node_modules/isarray/component.json",
+        "node_modules/isarray/package.json",
+        "node_modules/isobject/package.json",
+        "node_modules/relative/package.json",
+        "package.json"
+      ],
+      ".coffee": [
+        "lib/tree-view-copy-relative-path.coffee"
+      ],
+      ".js": [
+        "node_modules/isarray/index.js",
+        "node_modules/isarray/test.js",
+        "node_modules/isobject/index.js",
+        "node_modules/relative/index.js"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "",
+          "lib"
+        ],
+        "dependencies": {
+          "relative": "^3.0.2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/isobject"
+        ],
+        "dependencies": {
+          "isarray": "1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/relative"
+        ],
+        "dependencies": {
+          "isobject": "^2.0.0"
+        }
+      }
+    ]
+  }
+}
