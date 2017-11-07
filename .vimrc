@@ -18,6 +18,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 " NERDTree file system navigation
 Plugin 'scrooloose/nerdtree'
+" NERDCommenter
+Plugin 'scrooloose/nerdcommenter'
 " Airline status/tabline customization
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -25,12 +27,12 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 " Git wrapper
 Plugin 'tpope/vim-fugitive'
+" Easily change quotes and tags
+Plugin 'tpope/vim-surround'
 " Tmux vim navigation
 Plugin 'christoomey/vim-tmux-navigator'
 " Latex support
 "Plugin 'vim-latex/vim-latex'
-" Typescript syntax support
-Plugin 'leafgarland/typescript-vim'
 
 " All Plugins before this line
 call vundle#end()
@@ -83,6 +85,10 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
+" Make window splitting more natural
+set splitright
+set splitbelow
+
 " Show trailing whitespace
 set list listchars=tab:»·,trail:·
 
@@ -90,6 +96,7 @@ set list listchars=tab:»·,trail:·
 " Easier insert exit
 imap jk <ESC>
 imap kj <ESC>
+
 " Easier split pane navigation
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -108,3 +115,19 @@ endfunction
 " Buffer toggles
 nmap M :NERDTreeToggle<CR>
 nmap T :TagbarToggle<CR>
+
+" Enabling filetype plugins for NERD Commenter
+filetype plugin on
+
+" NERD Commenter Settings
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
