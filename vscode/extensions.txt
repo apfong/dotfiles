@@ -1,0 +1,13 @@
+aki77.haml-lint-0.0.3
+dbaeumer.vscode-eslint-1.7.0
+glen-84.sass-lint-1.0.3
+kamikillerto.vscode-colorize-0.7.2
+kamikillerto.vscode-colorize-0.8.0
+karunamurti.haml-1.1.0
+misogi.ruby-rubocop-0.7.1
+ms-python.python-2018.10.0
+ms-python.python-2018.10.1
+msjsdiag.debugger-for-chrome-4.11.0
+rebornix.ruby-0.20.0
+vayan.haml-1.0.1
+vscodevim.vim-0.16.12

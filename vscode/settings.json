@@ -1,0 +1,18 @@
+{
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "vim.useSystemClipboard": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+      {
+        "before": ["j", "k"],
+        "after": ["<Esc>"]
+      }
+    ],
+    "window.restoreWindows": "all",
+    "window.title": "${activeEditorLong}${separator}${rootName}",
+    "eslint.autoFixOnSave": true,
+    "eslint.run": "onSave",
+    "python.linting<pylint>Enabled": true,
+    "editor.minimap.enabled": false
+  }
