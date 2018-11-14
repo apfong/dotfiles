@@ -33,6 +33,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
 " Latex support
 "Plugin 'vim-latex/vim-latex'
+" Palenight theme
+Plugin 'drewtempelmeyer/palenight'
+" One theme
+Plugin 'rakr/vim-one'
+
+""" Front-end plugins
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " All Plugins before this line
 call vundle#end()
@@ -78,6 +86,8 @@ set hls
 "set textwidth=79
 "set colorcolumn=80
 set nu
+set background=dark
+colorscheme palenight
 
 " Set up tabs spaces
 set autoindent
