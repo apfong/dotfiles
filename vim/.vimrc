@@ -46,11 +46,17 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 " Easily change quotes and tags
 Plugin 'tpope/vim-surround'
+" Change opening and closing tags at the same time
+Plugin 'AndrewRadev/tagalong.vim'
 " Tmux vim navigation
 Plugin 'christoomey/vim-tmux-navigator'
 " Fuzzy search
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Linting
+Plugin 'dense-analysis/ale'
+" Vim Magit
+Plugin 'jreybert/vimagit'
 
 """"""""""""""""""""""""
 " Application Specific "
@@ -76,7 +82,7 @@ filetype plugin indent on
 "
 " see :h vundle for more details or wiki for FAQ
 "
-" To install Plugins, 
+" To install Plugins,
 "    launch vim and run :PluginInstall
 "    or from command line: vim +PluginInstall +qall
 " Non-Plugin stuff after this line
@@ -167,6 +173,12 @@ command! -bang -nargs=* Rg
 nnoremap <silent> <c-F> :Rg<CR>
 nnoremap <silent> <c-p> :Files<CR>
 
-" Enabling filetype plugins for NERD Commenter
-" filetype plugin on
-
+" Linting configuration
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\   'jsx': ['prettier', 'eslint'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
