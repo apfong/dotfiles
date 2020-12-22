@@ -2,12 +2,29 @@
 
 ## Vim
 
+For Windows users, replace usage of the Unix `~/.vim` directory with `%USERPROFILE%\vimfiles`,
+or another directory if you have configured Vim differently. On Windows, your `~/.vimrc` file
+will be similarly stored in `%USERPROFILE%\_vimrc`
+
+### Changing the config
+
+After saving changes to your `.vimrc`, run the following commands:
+
+```
+:so ~/.vimrc
+:PluginInstall
+```
+
 ### Managing sessions:
 
 **Making Sessions**
 ```
+# Create a new session file
 # :mksession ~/.vim/sessions/session.vim
 :mks ~/.vim/sessions/session.vim
+
+# Overwrite the current session
+:mks!
 ```
 
 **Reloading Sessions**
