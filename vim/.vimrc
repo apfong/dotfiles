@@ -1,3 +1,6 @@
+" Fix slowdown when switching tmux sessions
+set shell=/bin/bash\ -i
+
 " Turn of vi improvements
 set nocompatible
 filetype off
@@ -14,33 +17,50 @@ call vundle#begin()
 " Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+""""""""""""""""""""""""
+" Editor Appearance    "
+""""""""""""""""""""""""
 " Solarized color scheme from https://github.com/altercation/vim-colors-solarized.git
 Plugin 'altercation/vim-colors-solarized'
-" NERDTree file system navigation
-Plugin 'scrooloose/nerdtree'
-" NERDCommenter
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'pineapplegiant/spaceduck'
+Plugin 'dikiaap/minimalist'
+Plugin 'ghifarit53/tokyonight-vim'
+Plugin 'sainnhe/sonokai'
+Plugin 'joshdick/onedark.vim'
 " Airline status/tabline customization
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Tagbar class outline viewer
 Plugin 'majutsushi/tagbar'
+
+""""""""""""""""""""""""
+" Editor Functionality "
+""""""""""""""""""""""""
+" Language pack for synatx support
+Plugin 'sheerun/vim-polyglot'
+" NERDTree file system navigation
+Plugin 'scrooloose/nerdtree'
+" Better commenting (gc/gcc)
+Plugin 'tpope/vim-commentary'
 " Git wrapper
 Plugin 'tpope/vim-fugitive'
 " Easily change quotes and tags
 Plugin 'tpope/vim-surround'
 " Tmux vim navigation
 Plugin 'christoomey/vim-tmux-navigator'
+" Fuzzy search
+Plugin 'junegunn/fzf.vim'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+""""""""""""""""""""""""
+" Application Specific "
+""""""""""""""""""""""""
 " Latex support
 "Plugin 'vim-latex/vim-latex'
-" Palenight theme
-Plugin 'drewtempelmeyer/palenight'
-" One theme
-Plugin 'rakr/vim-one'
-
-""" Front-end plugins
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+" Better markdown/note taking
+"Plugin 'sidofc/mkdx'
+" GLSL/Shader support
+Plugin 'tikhomirov/vim-glsl'
 
 " All Plugins before this line
 call vundle#end()
@@ -86,8 +106,18 @@ set hls
 "set textwidth=79
 "set colorcolumn=80
 set nu
-set background=dark
-colorscheme palenight
+set termguicolors
+" colorscheme minimalist
+colorscheme spaceduck
+" colorscheme onedark
+" colorscheme tokyonight
+" let g:tokyonight_style = 'storm' " available: night, storm
+" let g:tokyonight_enable_italic = 1
+
+" let g:airline_theme='minimalist'
+let g:airline_theme='spaceduck'
+" let g:airline_theme='onedark'
+" let g:airline_theme='tokyonight'
 
 " Set up tabs spaces
 set autoindent
@@ -125,19 +155,18 @@ endfunction
 " Buffer toggles
 nmap M :NERDTreeToggle<CR>
 nmap T :TagbarToggle<CR>
+nmap <M-p> :TagbarToggle<CR>
+
+" Searching
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \   <bang>0)
+nnoremap <silent> <c-F> :Rg<CR>
+nnoremap <silent> <c-p> :Files<CR>
 
 " Enabling filetype plugins for NERD Commenter
-filetype plugin on
+" filetype plugin on
 
-" NERD Commenter Settings
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
