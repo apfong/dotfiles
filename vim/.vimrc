@@ -25,8 +25,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'pineapplegiant/spaceduck'
 Plugin 'dikiaap/minimalist'
 Plugin 'ghifarit53/tokyonight-vim'
-Plugin 'sainnhe/sonokai'
 Plugin 'joshdick/onedark.vim'
+Plugin 'sainnhe/sonokai'
 " Airline status/tabline customization
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -38,6 +38,8 @@ Plugin 'majutsushi/tagbar'
 """"""""""""""""""""""""
 " Language pack for synatx support
 Plugin 'sheerun/vim-polyglot'
+" Ranger file system navigation
+Plugin 'francoiscabrol/ranger.vim'
 " NERDTree file system navigation
 Plugin 'scrooloose/nerdtree'
 " Better commenting (gc/gcc)
@@ -114,15 +116,15 @@ set hls
 set nu
 set termguicolors
 " colorscheme minimalist
-colorscheme spaceduck
-" colorscheme onedark
+" colorscheme spaceduck
+colorscheme onedark
 " colorscheme tokyonight
 " let g:tokyonight_style = 'storm' " available: night, storm
 " let g:tokyonight_enable_italic = 1
 
 " let g:airline_theme='minimalist'
-let g:airline_theme='spaceduck'
-" let g:airline_theme='onedark'
+" let g:airline_theme='spaceduck'
+let g:airline_theme='onedark'
 " let g:airline_theme='tokyonight'
 
 " Set up tabs spaces

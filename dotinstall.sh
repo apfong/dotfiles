@@ -1,6 +1,5 @@
 #!/bin/bash
 # Installation script for vim dotfiles
-cp vim/.vim ~
 cp vim/.vimrc ~
 cp tmux/.tmux.conf ~
 cp git/.gitconfig ~
