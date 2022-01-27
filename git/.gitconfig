@@ -14,6 +14,7 @@
   ci = commit
   co = checkout
   br = branch
+  brd = branch --sort=-committerdate
   fe = fetch --prune
   pu = pull --rebase --prune
   st = status
@@ -23,3 +24,5 @@
   diff = auto
   status = auto
   ui = auto
+[url "git@github.com:"]
+	insteadof = https://github.com/

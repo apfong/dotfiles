@@ -1,18 +1,30 @@
 {
-    "editor.tabSize": 2,
-    "editor.insertSpaces": true,
-    "vim.useSystemClipboard": true,
-    "vim.hlsearch": true,
-    "vim.insertModeKeyBindings": [
-      {
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "terminal.integrated.fontSize": 13,
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
         "before": ["j", "k"],
         "after": ["<Esc>"]
-      }
-    ],
-    "window.restoreWindows": "all",
-    "window.title": "${activeEditorLong}${separator}${rootName}",
-    "eslint.autoFixOnSave": true,
-    "eslint.run": "onSave",
-    "python.linting<pylint>Enabled": true,
-    "editor.minimap.enabled": false
+    }
+  ],
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 13,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "eslint.autoFixOnSave": true,
+  "eslint.run": "onSave",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": -1,
+  "window.restoreWindows": "all",
+  "window.title": "${activeEditorLong}${separator}${rootName}",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
+}
