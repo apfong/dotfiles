@@ -6,6 +6,12 @@ For Windows users, replace usage of the Unix `~/.vim` directory with `%USERPROFI
 or another directory if you have configured Vim differently. On Windows, your `~/.vimrc` file
 will be similarly stored in `%USERPROFILE%\_vimrc`
 
+Note: you need to install Vundle as a prereq
+
+```
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
 ### Changing the config
 
 After saving changes to your `.vimrc`, run the following commands:

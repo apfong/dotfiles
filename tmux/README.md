@@ -1,6 +1,12 @@
 # Setup
 ---
 
+0. On linux/windows, comment out the following line from ~/.tmux.conf
+
+```
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+```
+
 1. Run tmux
 
 ```
