@@ -186,7 +186,7 @@
   },
   "description": "Default UI for the Linter package",
   "devDependencies": {
-    "eslint-config-steelbrain": "^3.0.0",
+    "eslint-config-steelbrain": "^11.0.0",
     "flow-bin": "^0.52.0",
     "jasmine-fix": "^1.0.1",
     "rimraf": "^2.5.4"
