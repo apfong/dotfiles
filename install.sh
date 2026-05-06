@@ -194,5 +194,7 @@ echo
 echo "==> Done."
 echo "Open a new shell (or run 'exec zsh') to pick up the changes."
 if [[ "$(basename "${SHELL:-}")" != "zsh" ]] && command -v zsh &>/dev/null; then
-  echo "Set zsh as your default shell with: chsh -s \$(which zsh)"
+  # `sudo chsh ... $USER` works everywhere; bare `chsh` hits PAM and fails on
+  # headless Linux VMs where the user account has no password set.
+  echo "Set zsh as your default shell with: sudo chsh -s \$(which zsh) \$USER"
 fi
