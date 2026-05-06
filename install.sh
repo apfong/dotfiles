@@ -42,6 +42,61 @@ TS="$(date +%Y%m%d-%H%M%S)"
 echo "==> Installing dotfiles from ${REPO}"
 echo "==> Profile: ${PROFILE} (OS: $(uname -s))"
 
+# --- 0) Install OS dependencies --------------------------------------------
+# Tools the configs assume exist: zsh, tmux, vim, git, ripgrep, fzf.
+# Linux: apt-get (Debian/Ubuntu only). Mac: rely on brew if any are missing.
+install_deps_linux() {
+  local missing=()
+  for cmd in zsh tmux vim git rg fzf; do
+    command -v "$cmd" &>/dev/null || missing+=("$cmd")
+  done
+  if [[ ${#missing[@]} -eq 0 ]]; then
+    echo "  [ok  ] zsh tmux vim git ripgrep fzf"
+    return
+  fi
+  echo "  Missing: ${missing[*]} — installing via apt-get..."
+  # Map command names to apt package names where they differ.
+  local pkgs=()
+  for cmd in "${missing[@]}"; do
+    case "$cmd" in
+      rg) pkgs+=("ripgrep") ;;
+      *)  pkgs+=("$cmd") ;;
+    esac
+  done
+  sudo apt-get update -qq
+  sudo apt-get install -y -qq "${pkgs[@]}"
+}
+
+install_deps_mac() {
+  local missing=()
+  for cmd in zsh tmux vim git rg fzf; do
+    command -v "$cmd" &>/dev/null || missing+=("$cmd")
+  done
+  if [[ ${#missing[@]} -eq 0 ]]; then
+    echo "  [ok  ] zsh tmux vim git ripgrep fzf"
+    return
+  fi
+  if ! command -v brew &>/dev/null; then
+    echo "ERROR: missing ${missing[*]} and no brew to install them. Install Homebrew first: https://brew.sh" >&2
+    exit 1
+  fi
+  echo "  Missing: ${missing[*]} — installing via brew..."
+  local pkgs=()
+  for cmd in "${missing[@]}"; do
+    case "$cmd" in
+      rg) pkgs+=("ripgrep") ;;
+      *)  pkgs+=("$cmd") ;;
+    esac
+  done
+  brew install "${pkgs[@]}"
+}
+
+echo "==> Checking OS dependencies..."
+case "$(uname -s)" in
+  Linux)  install_deps_linux ;;
+  Darwin) install_deps_mac   ;;
+esac
+
 # --- helper: symlink with backup -------------------------------------------
 link() {
   local src="$1" dst="$2"
@@ -138,4 +193,6 @@ fi
 echo
 echo "==> Done."
 echo "Open a new shell (or run 'exec zsh') to pick up the changes."
-echo "On Mac, set zsh as default shell with: chsh -s \$(which zsh)"
+if [[ "$(basename "${SHELL:-}")" != "zsh" ]] && command -v zsh &>/dev/null; then
+  echo "Set zsh as your default shell with: chsh -s \$(which zsh)"
+fi
