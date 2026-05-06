@@ -14,6 +14,10 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#being('~/some/path/here')
 
+" Fix vim freezing on opening typescript files on mac
+" https://vi.stackexchange.com/questions/25086/vim-hangs-when-i-open-a-typescript-file
+set re=2
+
 " Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -184,3 +188,4 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+set tags=tags

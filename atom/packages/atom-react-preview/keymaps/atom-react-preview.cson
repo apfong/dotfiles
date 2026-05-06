@@ -1,2 +1,0 @@
-'atom-text-editor[data-grammar~=js]':
-  'ctrl-shift-m': 'atom-react-preview:toggle'
