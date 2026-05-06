@@ -122,13 +122,15 @@ link "${REPO}/tmux/.tmux.conf"        "${HOME}/.tmux.conf"
 link "${REPO}/vim/.vimrc"             "${HOME}/.vimrc"
 link "${REPO}/git/.gitignore_global"  "${HOME}/.gitignore_global"
 
-# Don't clobber an existing real .gitconfig (it likely has an email set).
-# Only symlink if missing.
-if [[ ! -e "${HOME}/.gitconfig" ]]; then
-  link "${REPO}/git/.gitconfig" "${HOME}/.gitconfig"
-else
-  echo "  [skip] ~/.gitconfig already exists (preserving it; merge ${REPO}/git/.gitconfig manually if needed)"
-fi
+# Don't symlink .gitconfig — it usually has user-set bits we don't want to
+# clobber (email, gh credential helper, signing keys). Instead, pull just
+# the [alias] section out of the repo's .gitconfig and apply each via
+# `git config --global` — idempotent, only touches aliases.
+echo "==> Applying git aliases from ${REPO}/git/.gitconfig..."
+git config --file "${REPO}/git/.gitconfig" --get-regexp '^alias\.' | while read -r key value; do
+  git config --global "$key" "$value"
+  printf '  [set ] %s\n' "$key"
+done
 
 # ripgrep configs (root of repo)
 [[ -f "${REPO}/.ripgreprc" ]] && link "${REPO}/.ripgreprc" "${HOME}/.ripgreprc"
