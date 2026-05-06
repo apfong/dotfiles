@@ -1,28 +1,50 @@
 [user]
-  name = Alexander Fong
+  name  = Alexander Fong
   email = alpfong@gmail.com
+
 [core]
-  editor = vim
+  editor       = vim
   excludesfile = ~/.gitignore_global
-  autocrlf = input
+  autocrlf     = input
+
 [push]
   default = simple
+
+[init]
+  defaultBranch = main
+
+[diff]
+  tool = vimdiff
+
+[color]
+  branch = auto
+  diff   = auto
+  status = auto
+  ui     = auto
+
+[filter "lfs"]
+  clean    = git-lfs clean -- %f
+  smudge   = git-lfs smudge -- %f
+  process  = git-lfs filter-process
+  required = true
+
 [alias]
   lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
   lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-  lg = !"git lg1"
-  ci = commit
-  co = checkout
-  br = branch
+  lg  = !"git lg1"
+  ci  = commit
+  co  = checkout
+  br  = branch
   brd = branch --sort=-committerdate
-  fe = fetch --prune
-  pu = pull --rebase --prune
-  st = status
+  fe  = fetch --prune
+  pu  = pull --rebase --prune
+  st  = status
   sublog = submodule foreach git lg -n 10
-[color]
-  branch = auto
-  diff = auto
-  status = auto
-  ui = auto
-[url "git@github.com:"]
-	insteadof = https://github.com/
+
+# Local overrides — machine-specific or sensitive settings live here and are
+# NOT tracked by this repo. Examples: per-host email, signing keys, the
+# `[url "git@github.com:"] insteadOf https://github.com/` rewrite (which is
+# useful on a laptop with SSH keys but breaks on dev VMs that use the gh
+# credential helper for HTTPS).
+[include]
+  path = ~/.gitconfig.local
