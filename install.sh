@@ -143,6 +143,31 @@ if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
+# Oh My Zsh's first-run installer writes ~/.zshrc even with RUNZSH/CHSH
+# disabled. Re-apply our links after it runs so a fresh machine actually ends
+# with the repository config rather than the generated template.
+link "${REPO}/zsh/.zshrc"    "${HOME}/.zshrc"
+link "${REPO}/zsh/.zprofile" "${HOME}/.zprofile"
+link "${REPO}/zsh/.zshenv"   "${HOME}/.zshenv"
+
+# GCE OS Login accounts are provided by NSS rather than /etc/passwd, so chsh
+# cannot update their login shell. Preserve the host's existing ~/.profile and
+# add a guarded interactive handoff instead. SSH commands and file transfers do
+# not have a TTY and continue to use the account's default shell.
+if [[ "$(uname -s)" == "Linux" ]]; then
+  PROFILE_MARKER="# dotfiles: interactive zsh handoff"
+  if ! grep -Fq "$PROFILE_MARKER" "${HOME}/.profile" 2>/dev/null; then
+    cat >> "${HOME}/.profile" <<'EOF'
+
+# dotfiles: interactive zsh handoff
+if [ -t 0 ] && [ -t 1 ] && command -v zsh >/dev/null 2>&1 && [ -z "${ZSH_VERSION:-}" ]; then
+  exec zsh -l
+fi
+EOF
+    printf '  [set ] interactive login shells use zsh\n'
+  fi
+fi
+
 ZSH_CUSTOM="${HOME}/.oh-my-zsh/custom"
 clone_plugin() {
   local name="$1" url="$2"
@@ -195,8 +220,6 @@ fi
 echo
 echo "==> Done."
 echo "Open a new shell (or run 'exec zsh') to pick up the changes."
-if [[ "$(basename "${SHELL:-}")" != "zsh" ]] && command -v zsh &>/dev/null; then
-  # `sudo chsh ... $USER` works everywhere; bare `chsh` hits PAM and fails on
-  # headless Linux VMs where the user account has no password set.
+if [[ "$(basename "${SHELL:-}")" != "zsh" && "$(uname -s)" != "Linux" ]] && command -v zsh &>/dev/null; then
   echo "Set zsh as your default shell with: sudo chsh -s \$(which zsh) \$USER"
 fi
