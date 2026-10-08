@@ -155,17 +155,32 @@ link "${REPO}/zsh/.zshenv"   "${HOME}/.zshenv"
 # add a guarded interactive handoff instead. SSH commands and file transfers do
 # not have a TTY and continue to use the account's default shell.
 if [[ "$(uname -s)" == "Linux" ]]; then
-  PROFILE_MARKER="# dotfiles: interactive zsh handoff"
-  if ! grep -Fq "$PROFILE_MARKER" "${HOME}/.profile" 2>/dev/null; then
-    cat >> "${HOME}/.profile" <<'EOF'
+  PROFILE_BEGIN="# >>> dotfiles: interactive zsh handoff >>>"
+  PROFILE_END="# <<< dotfiles: interactive zsh handoff <<<"
+  PROFILE_NEXT=$(mktemp)
+  awk -v begin="$PROFILE_BEGIN" -v end="$PROFILE_END" '
+    $0 == begin { managed = 1; next }
+    $0 == end { managed = 0; next }
+    managed { next }
+    $0 == "# dotfiles: interactive zsh handoff" { legacy = 3; next }
+    legacy > 0 { legacy--; next }
+    { print }
+  ' "${HOME}/.profile" 2>/dev/null > "$PROFILE_NEXT" || true
+  cat >> "$PROFILE_NEXT" <<'EOF'
 
-# dotfiles: interactive zsh handoff
-if [ -t 0 ] && [ -t 1 ] && command -v zsh >/dev/null 2>&1 && [ -z "${ZSH_VERSION:-}" ]; then
-  exec zsh -l
-fi
+# >>> dotfiles: interactive zsh handoff >>>
+case $- in
+  *i*)
+    if [ -t 0 ] && [ -t 1 ] && command -v zsh >/dev/null 2>&1 && [ -z "${ZSH_VERSION:-}" ]; then
+      exec zsh -l
+    fi
+    ;;
+esac
+# <<< dotfiles: interactive zsh handoff <<<
 EOF
-    printf '  [set ] interactive login shells use zsh\n'
-  fi
+  chmod --reference="${HOME}/.profile" "$PROFILE_NEXT" 2>/dev/null || chmod 0644 "$PROFILE_NEXT"
+  mv -f "$PROFILE_NEXT" "${HOME}/.profile"
+  printf '  [set ] interactive login shells use zsh\n'
 fi
 
 ZSH_CUSTOM="${HOME}/.oh-my-zsh/custom"
